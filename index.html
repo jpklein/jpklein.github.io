@@ -65,14 +65,14 @@
                     <!-- <li><a href="/">About</a></li>
                     <li><a href="/portfolio">Portfolio</a></li>
                     <li><a href="/resume">Resume</a></li> -->
-                    <li><a href="mailto:philippe@notahammer.com?&body=Hey%20Philippe%20-%20">Contact</a></li>
+                    <li><a class="contact" href="mailto:philippe@notahammer.com?body=Hey%20Philippe%20-%20">Contact</a><div class="g-recaptcha" data-callback="onCaptchaSubmit" data-sitekey="6LfRgicUAAAAALi0evPivjafAuYq0ls5XQpS2UwV" data-size="invisible"></div></li>
                 </ul>
                 <!-- @todo removes duplicate menu links  -->
                 <ul id="side-nav" class="side-nav">
                     <!-- <li><a href="/">About</a></li>
                     <li><a href="/portfolio">Portfolio</a></li>
                     <li><a href="/resume">Resume</a></li> -->
-                    <li><a href="mailto:philippe@notahammer.com?&body=Hey%20Philippe%20-%20">Contact</a></li>
+                    <li><a class="contact" href="mailto:philippe@notahammer.com?&body=Hey%20Philippe%20-%20">Contact</a></li>
                 </ul>
             </div>
         </nav>
@@ -108,8 +108,20 @@
     $(document).ready(function(){
         $('.parallax').parallax();
         $('.button-collapse').sideNav();
+        $('.contact').click(function(){
+            event.preventDefault();
+            grecaptcha.execute();
+        })
     });
+    function onCaptchaSubmit(token){
+        console.log( 'recaptcha token: '+token );
+        var response = grecaptcha.getResponse();
+        console.log( response );
+    };
     </script>
+    <script src='https://www.google.com/recaptcha/api.js' async defer></script>
+    Call grecaptcha.execute from a javascript method.
+          grecaptcha.execute();
 </body>
 </html>
 
