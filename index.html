@@ -113,10 +113,19 @@
             grecaptcha.execute();
         })
     });
+    // @todo Binds function to document/this in document.ready?
     function onCaptchaSubmit(token){
-        console.log( 'recaptcha token: '+token );
-        var response = grecaptcha.getResponse();
-        console.log( response );
+        $.ajax({
+            url: 'https://www.google.com/recaptcha/api/siteverify',
+            xhrFields: { withCredentials: true; },
+            method: 'POST',
+            data: {
+                secret: "6LfRgicUAAAAAKxm_9-SKK8PM7eNpqXzd3v7r8Dm",
+                response: token
+            }
+        }).done(function(data){
+            alert( "Data Loaded: " + data );
+        });
     };
     </script>
     <script src='https://www.google.com/recaptcha/api.js' async defer></script>
